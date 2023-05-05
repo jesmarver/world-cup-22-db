@@ -12,20 +12,17 @@ class TeamNames extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const style = TextStyle(fontSize: 17, fontWeight: FontWeight.bold);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           teamA,
-          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-        ),
-        const Text(
-          'VS',
-          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+          style: style,
         ),
         Text(
           teamB,
-          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+          style: style,
         ),
       ],
     );

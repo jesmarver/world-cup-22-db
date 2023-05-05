@@ -6,27 +6,37 @@ import 'package:meta/meta.dart';
 import 'dart:convert';
 
 class MatchResult {
-  final String equipoA;
-  final String equipoB;
-  final dynamic golesEquipoA;
-  final dynamic golesEquipoB;
-  final String torneo;
-  final String fase;
-  final String? goleadoresEquipoB;
-  final String fechaPartido;
-  final String? goleadoresEquipoA;
+  String equipoA;
+  String equipoB;
+  int golesEquipoA;
+  int golesEquipoB;
+  String fase;
+  String? goleadoresEquipoB;
+  String fechaPartido;
+  String? goleadoresEquipoA;
+  int? penaltisEquipoA;
+  int? penaltisEquipoB;
 
   MatchResult({
     required this.equipoA,
     required this.equipoB,
     required this.golesEquipoA,
     required this.golesEquipoB,
-    this.torneo = 'COPA MUNDIAL',
     required this.fase,
-    required this.goleadoresEquipoB,
+    this.goleadoresEquipoB,
     required this.fechaPartido,
-    required this.goleadoresEquipoA,
+    this.goleadoresEquipoA,
+    required this.penaltisEquipoA,
+    required this.penaltisEquipoB,
   });
+
+  List<String> get listaGoleadoresA {
+    return goleadoresEquipoA?.split(';') ?? [];
+  }
+
+  List<String> get listaGoleadoresB {
+    return goleadoresEquipoB?.split(';') ?? [];
+  }
 
   factory MatchResult.fromRawJson(String str) =>
       MatchResult.fromJson(json.decode(str));
@@ -36,12 +46,14 @@ class MatchResult {
   factory MatchResult.fromJson(Map<String, dynamic> json) => MatchResult(
         equipoA: json["equipo_a"],
         equipoB: json["equipo_b"],
-        golesEquipoA: json["goles_equipo_a"] ?? '',
-        golesEquipoB: json["goles_equipo_b"] ?? '',
+        golesEquipoA: json["goles_equipo_a"],
+        golesEquipoB: json["goles_equipo_b"],
         fase: json["fase"],
-        goleadoresEquipoB: json["goleadores_equipo_b"],
+        goleadoresEquipoB: json["goleadores_equipo_b"] ?? '',
         fechaPartido: json["fecha_partido"],
-        goleadoresEquipoA: json["goleadores_equipo_a"],
+        goleadoresEquipoA: json["goleadores_equipo_a"] ?? '',
+        penaltisEquipoA: json["penaltis_equipo_a"],
+        penaltisEquipoB: json["penaltis_equipo_b"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -53,5 +65,7 @@ class MatchResult {
         "goleadores_equipo_b": goleadoresEquipoB,
         "fecha_partido": fechaPartido,
         "goleadores_equipo_a": goleadoresEquipoA,
+        "penaltis_equipo_a": penaltisEquipoA,
+        "penaltis_equipo_b": penaltisEquipoB,
       };
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "542404511721",
+    "project_id": "worldcup22db",
+    "storage_bucket": "worldcup22db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542404511721:android:7b77ea6f8a4c1b02652d78",
+        "android_client_info": {
+          "package_name": "com.example.worldcup22db"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542404511721-riuni8jm9e12nqna8bqccg84lbji902u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDx15Aq4-vIAOMMFC5tZutEXsluYO5fG8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542404511721-riuni8jm9e12nqna8bqccg84lbji902u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

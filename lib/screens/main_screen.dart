@@ -1,4 +1,7 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:worldcup22db/services/match_service.dart';
 import 'package:worldcup22db/widgets/match_result_widget.dart';
 
 import '../widgets/widgets.dart';
@@ -9,6 +12,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final matchService = Provider.of<MatchService>(context);
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
@@ -20,13 +24,34 @@ class MainScreen extends StatelessWidget {
           child: Column(
             children: [
               const _Header(),
-              ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: size.height),
-                child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) => const _MatchCard(),
-                ),
-              )
+              FutureBuilder(
+                  future: matchService.getItems(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData || snapshot.data == false) {
+                      return Column(
+                        children: const [
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text('Cargando resultados'),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          CircularProgressIndicator(),
+                        ],
+                      );
+                    }
+                    return ConstrainedBox(
+                      constraints: BoxConstraints(maxHeight: size.height),
+                      child: ListView.builder(
+                        itemCount: matchService.matches.length,
+                        itemBuilder: (context, index) => FadeInLeft(
+                            child: _MatchCard(
+                          matchResult: matchService.matches[index],
+                        )),
+                      ),
+                    );
+                  })
             ],
           ),
         ),
@@ -36,14 +61,17 @@ class MainScreen extends StatelessWidget {
 }
 
 class _MatchCard extends StatelessWidget {
+  final MatchResult matchResult;
   const _MatchCard({
     super.key,
+    required this.matchResult,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, 'matchdetail'),
+      onTap: () =>
+          Navigator.pushNamed(context, 'matchdetail', arguments: matchResult),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
         width: double.infinity,
@@ -54,15 +82,20 @@ class _MatchCard extends StatelessWidget {
             boxShadow: const [
               BoxShadow(blurRadius: 4, spreadRadius: 0.5, color: Colors.black45)
             ]),
-        child: const _MatchInfo(),
+        child: _MatchInfo(
+          matchResult: matchResult,
+        ),
       ),
     );
   }
 }
 
 class _MatchInfo extends StatelessWidget {
+  final MatchResult matchResult;
+
   const _MatchInfo({
     super.key,
+    required this.matchResult,
   });
 
   @override
@@ -74,21 +107,27 @@ class _MatchInfo extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              TeamShield(),
-              MatchResultWidget(
-                goalA: 2,
-                goalB: 0,
+            children: [
+              TeamShieldName(
+                teamName: matchResult.equipoA,
+                imagePath: 'assets/betis.png',
               ),
-              TeamShield()
+              MatchResultWidget(
+                goalA: matchResult.golesEquipoA,
+                goalB: matchResult.golesEquipoB,
+              ),
+              TeamShieldName(
+                teamName: matchResult.equipoB,
+                imagePath: 'assets/betis.png',
+              )
             ],
           ),
-          const TeamNames(
-            teamA: 'Real Betis',
-            teamB: 'Sevilla FC',
-          ),
-          const MatchDate(
-            date: '20-11-2022',
+          // TeamNames(
+          //   teamA: matchResult.equipoA,
+          //   teamB: matchResult.equipoB,
+          // ),
+          MatchDate(
+            date: matchResult.fechaPartido,
           )
         ],
       ),

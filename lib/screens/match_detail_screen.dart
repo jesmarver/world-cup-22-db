@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:worldcup22db/widgets/match_result_widget.dart';
 import 'package:worldcup22db/widgets/widgets.dart';
 
 class MatchDetailScreen extends StatelessWidget {
@@ -6,8 +7,9 @@ class MatchDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> golesA = ["21' Manolo", "32' Juan"];
-    List<String> golesB = ["13' Pablo"];
+    final matchResult =
+        ModalRoute.of(context)?.settings.arguments as MatchResult;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
         body: SafeArea(
             child: SingleChildScrollView(
@@ -32,20 +34,33 @@ class MatchDetailScreen extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
+            MatchResultWidget(
+                goalA: matchResult.golesEquipoA,
+                goalB: matchResult.golesEquipoB),
+            const SizedBox(
+              height: 20,
+            ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 35),
               child: Column(
                 children: [
-                  const Text('Fecha 1'),
+                  Text(
+                    matchResult.fase,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      TeamShield(),
-                      MatchDate(date: '10-05-2023'),
-                      TeamShield()
+                    children: [
+                      TeamShieldName(
+                        teamName: matchResult.equipoA,
+                        imagePath: 'assets/betis.png',
+                      ),
+                      MatchDate(date: matchResult.fechaPartido),
+                      TeamShieldName(
+                        teamName: matchResult.equipoB,
+                        imagePath: 'assets/betis.png',
+                      )
                     ],
                   ),
-                  const TeamNames(teamA: 'Real Betis', teamB: 'Sevilla FC'),
                   const Divider(
                     thickness: 4,
                     height: 50,
@@ -65,9 +80,10 @@ class MatchDetailScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ...golesA.map(
+                          ...matchResult.listaGoleadoresA.map(
                             (e) => Container(
                               margin: const EdgeInsets.only(bottom: 5),
+                              width: size.width * 0.5 - 50,
                               child: Text(
                                 e,
                                 style: const TextStyle(fontSize: 15),
@@ -79,9 +95,10 @@ class MatchDetailScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          ...golesB.map(
+                          ...matchResult.listaGoleadoresB.map(
                             (e) => Container(
                               margin: const EdgeInsets.only(bottom: 5),
+                              width: size.width * 0.5 - 50,
                               child: Text(
                                 e,
                                 style: const TextStyle(fontSize: 15),

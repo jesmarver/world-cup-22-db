@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>542404511721-bc4kipt64275hophhdc0jt6d3pd4lsc2.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.542404511721-bc4kipt64275hophhdc0jt6d3pd4lsc2</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBzn5sqv-GWyF8QaHjYbAJFjaYUi-lGc7U</string>
+	<key>GCM_SENDER_ID</key>
+	<string>542404511721</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.worldcup22db</string>
+	<key>PROJECT_ID</key>
+	<string>worldcup22db</string>
+	<key>STORAGE_BUCKET</key>
+	<string>worldcup22db.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:542404511721:ios:1dd40c3d064dc5a8652d78</string>
+</dict>
+</plist>
