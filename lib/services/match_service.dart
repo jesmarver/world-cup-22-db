@@ -45,6 +45,20 @@ class MatchService extends ChangeNotifier {
         .toList();
   }
 
+  showTeams() {
+    List<String> teamNames = [];
+
+    matches.forEach((element) {
+      if (!teamNames.contains(element.equipoA)) {
+        teamNames.add(element.equipoA);
+      }
+      if (!teamNames.contains(element.equipoB)) {
+        teamNames.add(element.equipoB);
+      }
+    });
+    print(teamNames);
+  }
+
   Future<bool> getItems() async {
     if (matches.isNotEmpty) return true;
     final url = Uri.https(_baseUrl, 'Matches.json');

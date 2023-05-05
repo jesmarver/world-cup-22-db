@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 
 class TeamShieldName extends StatelessWidget {
   final String teamName;
-  final String imagePath;
   const TeamShieldName({
     super.key,
     required this.teamName,
-    required this.imagePath,
   });
 
   @override
@@ -16,7 +14,7 @@ class TeamShieldName extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            imagePath,
+            'assets/$teamName.png',
             width: 60,
           ),
           Text(teamName)

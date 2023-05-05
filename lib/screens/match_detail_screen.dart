@@ -58,12 +58,10 @@ class MatchDetailScreen extends StatelessWidget {
                     children: [
                       TeamShieldName(
                         teamName: matchResult.equipoA,
-                        imagePath: 'assets/betis.png',
                       ),
                       MatchDate(date: matchResult.fechaPartido),
                       TeamShieldName(
                         teamName: matchResult.equipoB,
-                        imagePath: 'assets/betis.png',
                       )
                     ],
                   ),

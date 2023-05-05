@@ -53,7 +53,6 @@ class _MatchInfo extends StatelessWidget {
             children: [
               TeamShieldName(
                 teamName: matchResult.equipoA,
-                imagePath: 'assets/betis.png',
               ),
               Hero(
                 tag:
@@ -65,7 +64,6 @@ class _MatchInfo extends StatelessWidget {
               ),
               TeamShieldName(
                 teamName: matchResult.equipoB,
-                imagePath: 'assets/betis.png',
               )
             ],
           ),
