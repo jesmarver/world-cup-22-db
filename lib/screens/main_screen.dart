@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:worldcup22db/services/match_service.dart';
 import 'package:worldcup22db/widgets/match_result_widget.dart';
 
+import '../delegates/search_match_delegate.dart';
 import '../widgets/widgets.dart';
 
 class MainScreen extends StatelessWidget {
@@ -45,10 +46,21 @@ class MainScreen extends StatelessWidget {
                       constraints: BoxConstraints(maxHeight: size.height),
                       child: ListView.builder(
                         itemCount: matchService.matches.length,
-                        itemBuilder: (context, index) => FadeInLeft(
-                            child: _MatchCard(
-                          matchResult: matchService.matches[index],
-                        )),
+                        itemBuilder: (context, index) {
+                          if (index == matchService.matches.length - 1) {
+                            return Container(
+                              margin: const EdgeInsets.only(bottom: 200),
+                              child: FadeInLeft(
+                                  child: MatchCard(
+                                matchResult: matchService.matches[index],
+                              )),
+                            );
+                          }
+                          return FadeInLeft(
+                              child: MatchCard(
+                            matchResult: matchService.matches[index],
+                          ));
+                        },
                       ),
                     );
                   })
@@ -57,81 +69,6 @@ class MainScreen extends StatelessWidget {
         ),
       ),
     ));
-  }
-}
-
-class _MatchCard extends StatelessWidget {
-  final MatchResult matchResult;
-  const _MatchCard({
-    super.key,
-    required this.matchResult,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () =>
-          Navigator.pushNamed(context, 'matchdetail', arguments: matchResult),
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-        width: double.infinity,
-        height: 200,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: const [
-              BoxShadow(blurRadius: 4, spreadRadius: 0.5, color: Colors.black45)
-            ]),
-        child: _MatchInfo(
-          matchResult: matchResult,
-        ),
-      ),
-    );
-  }
-}
-
-class _MatchInfo extends StatelessWidget {
-  final MatchResult matchResult;
-
-  const _MatchInfo({
-    super.key,
-    required this.matchResult,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TeamShieldName(
-                teamName: matchResult.equipoA,
-                imagePath: 'assets/betis.png',
-              ),
-              MatchResultWidget(
-                goalA: matchResult.golesEquipoA,
-                goalB: matchResult.golesEquipoB,
-              ),
-              TeamShieldName(
-                teamName: matchResult.equipoB,
-                imagePath: 'assets/betis.png',
-              )
-            ],
-          ),
-          // TeamNames(
-          //   teamA: matchResult.equipoA,
-          //   teamB: matchResult.equipoB,
-          // ),
-          MatchDate(
-            date: matchResult.fechaPartido,
-          )
-        ],
-      ),
-    );
   }
 }
 
@@ -152,7 +89,9 @@ class _Header extends StatelessWidget {
           ),
           const Spacer(),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Provider.of<MatchService>(context, listen: false).sort();
+            },
             icon: const Icon(
               Icons.sort,
               size: 30,
@@ -162,9 +101,12 @@ class _Header extends StatelessWidget {
             width: 10,
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              final result = await showSearch(
+                  context: context, delegate: SearchMatchDelegate());
+            },
             icon: const Icon(
-              Icons.language,
+              Icons.search,
               size: 30,
             ),
           ),

@@ -11,7 +11,11 @@ class MatchResultWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tstyle = TextStyle(fontSize: 25, fontWeight: FontWeight.bold);
+    const tstyle = TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.bold,
+        decoration: TextDecoration.none,
+        backgroundColor: Colors.transparent);
     return Container(
       // color: Colors.red,
       child: Row(
@@ -24,7 +28,7 @@ class MatchResultWidget extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Text(
+          const Text(
             '-',
             style: tstyle,
           ),

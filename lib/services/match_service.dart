@@ -10,10 +10,39 @@ class MatchService extends ChangeNotifier {
   List<MatchResult> _matches = [];
 
   List<MatchResult> get matches => _matches;
+  bool sorted = true;
 
   set matches(List<MatchResult> val) {
     _matches = val;
     notifyListeners();
+  }
+
+  void sort() {
+    _matches.sort((a, b) {
+      final splitDateA = a.fechaPartido.split('-');
+      final dateAstr = splitDateA[2] + splitDateA[1] + splitDateA[0];
+      final splitDateB = b.fechaPartido.split('-');
+      final dateBstr = splitDateB[2] + splitDateB[1] + splitDateB[0];
+      final dateA = DateTime.parse(dateAstr);
+      final dateB = DateTime.parse(dateBstr);
+      return sorted ? dateB.compareTo(dateA) : dateA.compareTo(dateB);
+    });
+    sorted = !sorted;
+    notifyListeners();
+  }
+
+  List<MatchResult> findByName(String name) {
+    return matches
+        .where((element) =>
+            element.equipoA
+                .trim()
+                .toLowerCase()
+                .contains(name.trim().toLowerCase()) ||
+            element.equipoB
+                .trim()
+                .toLowerCase()
+                .contains(name.trim().toLowerCase()))
+        .toList();
   }
 
   Future<bool> getItems() async {

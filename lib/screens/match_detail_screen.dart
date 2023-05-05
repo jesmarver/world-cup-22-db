@@ -34,9 +34,13 @@ class MatchDetailScreen extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            MatchResultWidget(
-                goalA: matchResult.golesEquipoA,
-                goalB: matchResult.golesEquipoB),
+            Hero(
+              tag:
+                  '${matchResult.equipoA}-${matchResult.equipoB}-${matchResult.fechaPartido}',
+              child: MatchResultWidget(
+                  goalA: matchResult.golesEquipoA,
+                  goalB: matchResult.golesEquipoB),
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -46,6 +50,8 @@ class MatchDetailScreen extends StatelessWidget {
                 children: [
                   Text(
                     matchResult.fase,
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w700),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -86,6 +92,7 @@ class MatchDetailScreen extends StatelessWidget {
                               width: size.width * 0.5 - 50,
                               child: Text(
                                 e,
+                                textAlign: TextAlign.start,
                                 style: const TextStyle(fontSize: 15),
                               ),
                             ),
@@ -101,6 +108,7 @@ class MatchDetailScreen extends StatelessWidget {
                               width: size.width * 0.5 - 50,
                               child: Text(
                                 e,
+                                textAlign: TextAlign.end,
                                 style: const TextStyle(fontSize: 15),
                               ),
                             ),
@@ -108,7 +116,20 @@ class MatchDetailScreen extends StatelessWidget {
                         ],
                       ),
                     ],
-                  )
+                  ),
+                  if (matchResult.penaltisEquipoA != null)
+                    const Text(
+                      'Resultado de penaltis',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  if (matchResult.penaltisEquipoA != null)
+                    MatchResultWidget(
+                        goalA: matchResult.penaltisEquipoA!,
+                        goalB: matchResult.penaltisEquipoB!),
                 ],
               ),
             )
