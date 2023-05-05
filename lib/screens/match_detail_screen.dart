@@ -34,13 +34,9 @@ class MatchDetailScreen extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            Hero(
-              tag:
-                  '${matchResult.equipoA}-${matchResult.equipoB}-${matchResult.fechaPartido}',
-              child: MatchResultWidget(
-                  goalA: matchResult.golesEquipoA,
-                  goalB: matchResult.golesEquipoB),
-            ),
+            MatchResultWidget(
+                goalA: matchResult.golesEquipoA,
+                goalB: matchResult.golesEquipoB),
             const SizedBox(
               height: 20,
             ),

@@ -54,13 +54,9 @@ class _MatchInfo extends StatelessWidget {
               TeamShieldName(
                 teamName: matchResult.equipoA,
               ),
-              Hero(
-                tag:
-                    '${matchResult.equipoA}-${matchResult.equipoB}-${matchResult.fechaPartido}',
-                child: MatchResultWidget(
-                  goalA: matchResult.golesEquipoA,
-                  goalB: matchResult.golesEquipoB,
-                ),
+              MatchResultWidget(
+                goalA: matchResult.golesEquipoA,
+                goalB: matchResult.golesEquipoB,
               ),
               TeamShieldName(
                 teamName: matchResult.equipoB,
