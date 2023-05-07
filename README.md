@@ -1,17 +1,17 @@
 # worldcup22db
 
-A new Flutter project.
+Una aplicación creada para obtener los datos de los partidos jugados durante el mundial de 2022. Está diseñada con flutter por lo que es compatible para dispositivos andoid, ios y web entre otros.
 
-## Getting Started
+## Instrucciones
 
-This project is a starting point for a Flutter application.
+Para poder ejecutar la aplicación hay que instalarse flutter como se indica en la siguiente documentación de la página oficial de flutter:
 
-A few resources to get you started if this is your first Flutter project:
+https://docs.flutter.dev/get-started/install
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Cuando ya se tenga todo instalado solo hay que ejecutar el comando flutter run desde la raiz del proyecto y ejecutarlo desde un emulador o dispositivo físico si se tiene conectado al PC.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# world-cup-22-db
+## Descargar APK
+
+Si se quiere ejecutar la aplicación sin tener que instalar todos los componentes de dart y flutter, se puede descargar la apk para poder ejecutar la app desde dispositivos android.
+
+https://mega.nz/file/gTtnSS7Y#dB8PKK9uVsuf_GzYtyUg0dIw4waK-iVHYzyF9wKro0M
